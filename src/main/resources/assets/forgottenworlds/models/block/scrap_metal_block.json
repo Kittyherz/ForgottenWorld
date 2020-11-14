@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "forgottenworlds:blocks/scrap_metal_block"
+  }
+}

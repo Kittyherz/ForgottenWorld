@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "axis=y":  { "model": "forgottenworlds:block/lumeos_log" },
+    "axis=z":   { "model": "forgottenworlds:block/lumeos_log", "x": 90 },
+    "axis=x":   { "model": "forgottenworlds:block/lumeos_log", "x": 90, "y": 90 }
+  }
+}

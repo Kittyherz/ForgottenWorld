@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "forgottenworlds:blocks/lumeos_sapling"
+  }
+}

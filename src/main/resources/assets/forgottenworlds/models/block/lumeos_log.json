@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "forgottenworlds:blocks/lumeos_log_top",
+    "side": "forgottenworlds:blocks/lumeos_log"
+  }
+}
