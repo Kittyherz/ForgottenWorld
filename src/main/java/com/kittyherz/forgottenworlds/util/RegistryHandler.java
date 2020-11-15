@@ -2,6 +2,8 @@ package com.kittyherz.forgottenworlds.util;
 
 import com.kittyherz.forgottenworlds.ForgottenWorlds;
 import com.kittyherz.forgottenworlds.blocks.*;
+import com.kittyherz.forgottenworlds.client.entity.render.TestMobRender;
+import com.kittyherz.forgottenworlds.init.ModEntityTypes;
 import com.kittyherz.forgottenworlds.items.ItemBase;
 import com.kittyherz.forgottenworlds.world.feature.LumeosTree;
 import net.minecraft.block.Block;
@@ -9,6 +11,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -22,6 +25,7 @@ public class RegistryHandler {
 
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.TEST_MOB.get(), TestMobRender::new);
     }
 
     //Items
