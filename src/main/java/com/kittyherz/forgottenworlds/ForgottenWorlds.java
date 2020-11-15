@@ -1,6 +1,7 @@
 package com.kittyherz.forgottenworlds;
 
 import com.kittyherz.forgottenworlds.blocks.LumeosSapling;
+import com.kittyherz.forgottenworlds.init.ModEntityTypes;
 import com.kittyherz.forgottenworlds.util.RegistryHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -42,6 +43,7 @@ public class ForgottenWorlds
         // Register the doClientStuff method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
+        ModEntityTypes.ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
         RegistryHandler.init();
 
         // Register ourselves for server and other game events we are interested in
