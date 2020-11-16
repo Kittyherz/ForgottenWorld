@@ -14,7 +14,7 @@ public class LumeosLog extends LogBlock {
                 .hardnessAndResistance(2.0f,2.0f)
                 .sound(SoundType.WOOD)
                 .harvestLevel(0)
-               .harvestTool(ToolType.AXE)
+                .harvestTool(ToolType.AXE)
                 );
     }
 
