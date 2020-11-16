@@ -1,4 +1,5 @@
-package com.kittyherz.forgottenworlds.blocks;
+package com.kittyherz.forgottenworlds.base;
+
 
 import com.kittyherz.forgottenworlds.ForgottenWorlds;
 import net.minecraft.block.Block;

@@ -1,8 +1,7 @@
-package com.kittyherz.forgottenworlds.items;
+package com.kittyherz.forgottenworlds.base;
 
 import com.kittyherz.forgottenworlds.ForgottenWorlds;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 
 public class ItemBase extends Item{
 
