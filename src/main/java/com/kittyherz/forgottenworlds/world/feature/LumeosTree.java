@@ -19,7 +19,7 @@ public class LumeosTree extends Tree {
                     new SimpleBlockStateProvider(BlockInit.LUMEOS_LEAVES.get().getDefaultState()),
                     new AcaciaFoliagePlacer(10,10)))//BlobFoliagePlacer(3, 0)
                     .baseHeight(12).heightRandA(5).foliageHeight(9).ignoreVines()
-                    .setSapling((IPlantable) BlockInit.LUMEOS_LEAVES.get()).build();
+                    .setSapling((IPlantable) BlockInit.LUMEOS_SAPLING.get()).build();
 
     @Override
     protected ConfiguredFeature<TreeFeatureConfig, ?> getTreeFeature(Random randomIn, boolean p_225546_2_) {
