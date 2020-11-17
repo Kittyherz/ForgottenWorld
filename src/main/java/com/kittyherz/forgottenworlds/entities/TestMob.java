@@ -3,12 +3,10 @@ package com.kittyherz.forgottenworlds.entities;
 import com.kittyherz.forgottenworlds.init.ModEntityTypes;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
-import net.minecraft.entity.ai.goal.BreedGoal;
-import net.minecraft.entity.ai.goal.EatGrassGoal;
-import net.minecraft.entity.ai.goal.PanicGoal;
-import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -43,6 +41,7 @@ public class TestMob extends AnimalEntity {
         this.goalSelector.addGoal(0,new SwimGoal(this));
         this.goalSelector.addGoal(1,new PanicGoal(this,3));
         this.goalSelector.addGoal(3,new BreedGoal(this,2));
+
 
 
     }
@@ -102,4 +101,10 @@ public class TestMob extends AnimalEntity {
     public void onStruckByLightning(LightningBoltEntity lightningBolt) {
         this.setGlowing(true);
     }
+
+
+
+
+
+
 }

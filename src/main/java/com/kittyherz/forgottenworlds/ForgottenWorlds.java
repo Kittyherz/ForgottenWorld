@@ -29,6 +29,8 @@ public class ForgottenWorlds {
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
+
+
         ItemInit.ITEMS.register(modEventBus);
         BlockInit.BLOCKS.register(modEventBus);
         ModEntityTypes.ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());

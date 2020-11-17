@@ -9,10 +9,15 @@ import com.kittyherz.forgottenworlds.entities.TestMob;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.entity.model.QuadrupedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.math.MathHelper;
 
-public class TestMobModel<T extends TestMob> extends EntityModel<T> {
+
+public class TestMobModel<T extends TestMob> extends QuadrupedModel<T> {
+
+
     private final ModelRenderer Body;
     private final ModelRenderer Legs;
     private final ModelRenderer Front;
@@ -22,8 +27,12 @@ public class TestMobModel<T extends TestMob> extends EntityModel<T> {
     private final ModelRenderer BackRight;
     private final ModelRenderer BackLeft;
     private final ModelRenderer Head;
+    private float headRotationAngleX;
 
+
+    protected double distanceMovedTotal = 0.0D;
     public TestMobModel() {
+        super(12, 0.0F, false, 8.0F, 4.0F, 2.0F, 2.0F, 24);
         textureWidth = 16;
         textureHeight = 16;
 
@@ -72,19 +81,45 @@ public class TestMobModel<T extends TestMob> extends EntityModel<T> {
         Head.setTextureOffset(0, 0).addBox(0.0F, -7.0F, -3.75F, 4.0F, 1.0F, 3.0F, 0.0F, false);
     }
 
-    @Override
-    public void setRotationAngles(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        //previously the render function, render code was moved to a method below
-    }
+
 
     @Override
     public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         Body.render(matrixStack, buffer, packedLight, packedOverlay);
+
+        Body.rotateAngleX += 1;
+
+
     }
+
+
 
     public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;
     }
+
+    public void setLivingAnimations(T entityIn, float limbSwing, float limbSwingAmount, float partialTick) {
+        super.setLivingAnimations(entityIn, limbSwing, limbSwingAmount, partialTick);
+        this.headModel.rotationPointY = 6.0F + entityIn.getHeadRotationPointY(partialTick) * 9.0F;
+        this.headRotationAngleX = entityIn.getHeadRotationAngleX(partialTick);
+    }
+
+    /**
+     * Sets this entity's model rotation angles
+     */
+    @Override
+    public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        //super.setRotationAngles(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+        //this.headModel.rotateAngleX = this.headRotationAngleX;
+        Head.rotateAngleX = headPitch * ((float)Math.PI / 180F);
+        Head.rotateAngleY = netHeadYaw * ((float)Math.PI / 180F);
+        Body.rotateAngleX = 0;
+        BackRight.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+        BackLeft.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
+        FrontRight.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
+        FrontLeft.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+    }
+
 }
