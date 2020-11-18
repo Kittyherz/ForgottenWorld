@@ -12,7 +12,9 @@ import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.entity.model.QuadrupedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.projectile.SmallFireballEntity;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 
 
 public class TestMobModel<T extends TestMob> extends QuadrupedModel<T> {
@@ -87,7 +89,7 @@ public class TestMobModel<T extends TestMob> extends QuadrupedModel<T> {
     public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         Body.render(matrixStack, buffer, packedLight, packedOverlay);
 
-        Body.rotateAngleX += 1;
+
 
 
     }
@@ -100,26 +102,56 @@ public class TestMobModel<T extends TestMob> extends QuadrupedModel<T> {
         modelRenderer.rotateAngleZ = z;
     }
 
+    boolean rolling = false;
     public void setLivingAnimations(T entityIn, float limbSwing, float limbSwingAmount, float partialTick) {
+
+
+
+
+
         super.setLivingAnimations(entityIn, limbSwing, limbSwingAmount, partialTick);
         this.headModel.rotationPointY = 6.0F + entityIn.getHeadRotationPointY(partialTick) * 9.0F;
         this.headRotationAngleX = entityIn.getHeadRotationAngleX(partialTick);
+
     }
 
     /**
      * Sets this entity's model rotation angles
      */
+
     @Override
     public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         //super.setRotationAngles(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         //this.headModel.rotateAngleX = this.headRotationAngleX;
-        Head.rotateAngleX = headPitch * ((float)Math.PI / 180F);
-        Head.rotateAngleY = netHeadYaw * ((float)Math.PI / 180F);
-        Body.rotateAngleX = 0;
-        BackRight.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-        BackLeft.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
-        FrontRight.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
-        FrontLeft.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+
+        float tick = entityIn.ticksExisted%60;
+        Vec3d pos = new Vec3d(entityIn.lastTickPosX,entityIn.lastTickPosY,entityIn.lastTickPosZ);
+        if (pos.distanceTo(entityIn.getPositionVec())>0F) {
+            System.out.println(""+pos.distanceTo(entityIn.getPositionVec()));
+            rolling = true;
+
+            Body.rotateAngleX = ((float) Math.PI) * 1.4F * tick/10;
+            Body.rotateAngleY = 0;
+
+        }
+        else {
+            Body.rotateAngleY = ((float) Math.PI) * 1.4F * tick/10;
+            Body.rotateAngleX = 0;
+            rolling = false;
+            Body.rotateAngleX = 0;
+        }
+
+/*
+            System.out.println( this +" --> "+entityIn.getUniqueID());
+            Head.rotateAngleX = headPitch * ((float) Math.PI / 180F);
+            Head.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F);
+            Body.rotateAngleX = 0;
+            BackRight.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+            BackLeft.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
+            FrontRight.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
+            FrontLeft.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+*/
+
     }
 
 }

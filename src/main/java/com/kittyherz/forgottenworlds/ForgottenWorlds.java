@@ -33,7 +33,7 @@ public class ForgottenWorlds {
 
         ItemInit.ITEMS.register(modEventBus);
         BlockInit.BLOCKS.register(modEventBus);
-        ModEntityTypes.ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModEntityTypes.ENTITY_TYPES.register(modEventBus);
         //RegistryHandler.init();
         instance = this;
         // Register ourselves for server and other game events we are interested in
